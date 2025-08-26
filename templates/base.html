@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{% block title %}Klasifikasi Daun Mangrove{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand"><a href="{{ url_for('home') }}">MangroveLeaf</a></div>
+      <nav>
+        <a href="{{ url_for('home') }}" class="{% if request.path=='/' %}active{% endif %}">Home</a>
+        <a href="{{ url_for('deteksi') }}" class="{% if '/deteksi' in request.path %}active{% endif %}">Deteksi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <small>Mode: {{ 'Hybrid' if is_hybrid else 'CNN-only' }} • Masked BG: <b>{{ 'ON' if masked else 'OFF' }}</b></small>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Home · Klasifikasi Daun Mangrove{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Klasifikasi Daun Mangrove</h1>
+  <p>Aplikasi ini menggabungkan <b>fitur manual</b> (bentuk, tekstur, warna) dan <b>CNN</b> untuk mengenali 7 kelas daun mangrove.</p>
+  <ul>
+    <li>Unggah 1 atau banyak gambar sekaligus</li>
+    <li>Hasil tampil dengan label & confidence di atas gambar</li>
+    <li>Mode: {{ 'Hybrid (fitur manual + CNN)' if is_hybrid else 'CNN-only' }}</li>
+  </ul>
+  <a class="btn" href="{{ url_for('deteksi') }}">Mulai Deteksi</a>
+</section>
+{% endblock %}

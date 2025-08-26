@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Deteksi · Klasifikasi Daun Mangrove{% endblock %}
+{% block content %}
+<section class="card">
+  <h2>Deteksi Daun</h2>
+  <form method="post" enctype="multipart/form-data">
+  <input type="file" name="files" accept="image/*" multiple />
+  <label class="check">
+    <input type="checkbox" name="show_features" value="1" {% if show_features %}checked{% endif %}>
+    Tampilkan ringkasan fitur
+  </label>
+  <button type="submit" class="btn">Prediksi</button>
+</form>
+{% if error %}<div class="error">{{ error }}</div>{% endif %}
+</section>
+
+{% if csv_relpath %}
+  <p><a class="btn" href="{{ url_for('static', filename=csv_relpath) }}" download>Download CSV fitur</a></p>
+{% endif %}
+
+{% if results and results|length > 0 %}
+<section class="card">
+  <h2>Hasil</h2>
+  <div class="grid">
+    {% for r in results %}
+      <div class="item">
+        {% if r.img_url %}
+            <img src="{{ r.img_url }}" alt="{{ r.filename }}">
+        {% elif r.img_uri %}
+            <img src="{{ r.img_uri }}" alt="{{ r.filename }}">
+        {% else %}
+            <div class="placeholder">No Image</div>
+        {% endif %}
+        <div class="meta">
+          <div class="file">{{ r.filename }}</div>
+          {% if r.error %}
+            <div class="pred error">ERROR: {{ r.error }}</div>
+          {% else %}
+            <div class="pred">Prediksi: <b>{{ r.pred }}</b> ({{ r.conf }})</div>
+            <div class="topk">Top-k: {{ r.topk|join(', ') }}</div>
+          {% endif %}
+        </div>
+        {% if show_features and r.features %}
+            <table class="mini">
+                {% for k, v in r.features.items() %}
+                <tr><td>{{ k }}</td><td style="text-align:right">{{ '%.4f'|format(v) }}</td></tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

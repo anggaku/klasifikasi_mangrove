@@ -1,0 +1,53 @@
+{
+  "img_size": [
+    224,
+    224
+  ],
+  "classes": [
+    "Am",
+    "Ao",
+    "Bg",
+    "Hl",
+    "Lt",
+    "Ra",
+    "Sa"
+  ],
+  "feature_cols": [
+    "area",
+    "perimeter",
+    "form_factor",
+    "aspect_ratio",
+    "extent",
+    "solidity",
+    "eccentricity",
+    "hu_1",
+    "hu_2",
+    "hu_3",
+    "hu_4",
+    "hu_5",
+    "hu_6",
+    "hu_7",
+    "glcm_contrast",
+    "glcm_dissimilarity",
+    "glcm_homogeneity",
+    "glcm_ASM",
+    "glcm_energy",
+    "glcm_correlation",
+    "lbp_0",
+    "lbp_1",
+    "lbp_2",
+    "lbp_3",
+    "lbp_4",
+    "lbp_5",
+    "lbp_6",
+    "lbp_7",
+    "lbp_8",
+    "lbp_9",
+    "h_mean",
+    "s_mean",
+    "v_mean",
+    "h_std",
+    "s_std",
+    "v_std"
+  ]
+}
