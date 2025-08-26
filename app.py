@@ -49,6 +49,22 @@ CANDIDATE_MODELS = [
     BASE_DIR / "best_model_compressed.h5",   # CNN-only (file kamu)
 ]
 
+def _debug_artifacts():
+    import hashlib, keras
+    p = ARTIFACT_DIR / "best_hybrid.keras"
+    print("[DEBUG] looking at:", p.resolve())
+    if not p.exists():
+        print("[DEBUG] NOT FOUND"); return
+    print("[DEBUG] size:", p.stat().st_size)
+    print("[DEBUG] sha256:", hashlib.sha256(open(p,"rb").read()).hexdigest())
+    try:
+        m = keras.models.load_model(p, compile=False)
+        print("[DEBUG] input shape:", m.inputs[0].shape)
+    except Exception as e:
+        print("[DEBUG] load error:", e)
+
+_debug_artifacts()
+
 KEY_FEATURES = [
     "area","perimeter","form_factor","aspect_ratio","extent","solidity","eccentricity",
     "glcm_contrast","glcm_energy","glcm_homogeneity","h_mean","s_mean","v_mean"
