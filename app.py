@@ -22,6 +22,8 @@ from keras.applications.efficientnet import preprocess_input as effnet_preproces
 # ==== fitur manual ====
 from skimage.feature import graycomatrix, graycoprops, local_binary_pattern
 
+print("[DEBUG] TF:", tf.__version__, "Keras:", keras.__version__)
+
 # ------------------ konfigurasi umum ------------------
 SEED = 42
 os.environ["PYTHONHASHSEED"] = str(SEED)
